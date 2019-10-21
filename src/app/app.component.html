@@ -27,6 +27,31 @@
             <p class="comment-reply">
               Reply
             </p>
+            <div *ngIf="item.comments" class="replied-comments">
+              <div *ngFor="let replied_comment of item.comments" style="padding-left: 30px;">
+                <div class="user-avatar">
+                  <img src="{{replied_comment.src}}">
+                </div>
+                <div class="details-box">
+                  <div style="display: flex; flex-direction: row;">
+                    <p class="comment-name">
+                      {{replied_comment.name}}
+                    </p>
+                    <p class="comment-time">
+                      {{replied_comment.time}}
+                    </p>
+                  </div>
+                  <div class="details-section">
+                    <p class="comment-description">
+                      {{replied_comment.comment}}
+                    </p>
+                    <p class="comment-reply">
+                      Reply
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

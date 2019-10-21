@@ -24,7 +24,7 @@
   .new-comment {
     display: flex;
     flex-direction: row;
-    padding: 5px 0px;
+    padding: 7.5px 0px;
     .user-avatar img {
       width: 50px;
       border-radius: 10px;
@@ -53,6 +53,26 @@
         font-size: 12px;
       }
     }
+
+    .replied-comments {
+      padding: 10px 0px;
+      border-left: 1px solid #d3d3d3;
+      margin-left: -30px;
+    }
   }
 
+  //.vl {
+  //  border-left: 1px solid #d3d3d3;
+  //  margin-left: -36px;
+  //}
+  .border-left {
+    border-left: 1px solid #D3D3D3;
+  }
+
+}
+
+@media screen and (min-width: 200px) and (max-width: 767px) {
+  .comments-section {
+    padding: 10% 10%;
+  }
 }
