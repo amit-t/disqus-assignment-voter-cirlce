@@ -13,44 +13,60 @@
     width: 100%;
     border-bottom: 1px solid #dedede;
   }
+
   .comments-title {
     margin-top: 0px;
     margin-bottom: 0px;
     padding: 10px 0px;
   }
+
   .comments-box-section {
     padding: 10px 0px;
   }
+
   .new-comment {
     display: flex;
     flex-direction: row;
     padding: 7.5px 0px;
+
     .user-avatar img {
       width: 50px;
       border-radius: 10px;
       padding-right: 5px;
     }
+
     .details-box {
       .comment-name {
         font-weight: bold;
         padding: 0px 5px 5px 0px;
         font-size: 15px;
       }
+
       .comment-time {
         color: #d3d3d3;
         font-size: 13px;
       }
     }
+
     .details-section {
-      display: flex;
-      flex-direction: column;
+      //display: flex;
+      //flex-direction: column;
+
       .comment-description {
         padding: 0px 0px 8px 0px;
         font-size: 14px;
       }
-      .comment-reply {
+
+      .comment-reply, .comment-dislike, .comment-like {
         color: #a9a9a9;
         font-size: 12px;
+        cursor: pointer;
+      }
+
+      .action-buttons p{
+        display: inline-flex;
+        flex-direction: column;
+        margin-right: 5px;
       }
     }
 
@@ -70,6 +86,7 @@
     border: 1px solid #e2e1e1;
     border-radius: 10px;
   }
+
   .submit-btn {
     padding: 10px 39px;
     border-radius: 5px;

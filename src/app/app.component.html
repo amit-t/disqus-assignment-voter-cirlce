@@ -2,51 +2,62 @@
 <div class="comments-section">
   <div class="comments-title-box">
     <h2 class="comments-title">
-      Comments
+      Comments ({{comments_count}})
     </h2>
   </div>
   <div class="comments-box-section">
-    <div>
-      <div class="new-comment" *ngFor="let item of comments">
+    <!--    Comment List-->
+    <div *ngIf="comments_count > 0">
+      <div class="new-comment" *ngFor="let comment of comments; let index = index">
         <div class="user-avatar">
-          <img src="{{item.src}}">
+          <ngx-avatar facebookId="1508319875" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/73.jpg"></ngx-avatar>
         </div>
         <div class="details-box">
           <div style="display: flex; flex-direction: row;">
             <p class="comment-name">
-              {{item.name}}
+              {{comment.author}}
             </p>
             <p class="comment-time">
-              {{item.time}}
+              {{comment.datetime | timeFromNow}}
             </p>
           </div>
           <div class="details-section">
             <p class="comment-description">
-              {{item.comment}}
+              {{comment.commentText}}
             </p>
-            <p class="comment-reply">
-              Reply
-            </p>
-            <div *ngIf="item.comments" class="replied-comments">
-              <div *ngFor="let replied_comment of item.comments" style="padding-left: 30px;">
+            <div class="action-buttons">
+              <p class="comment-reply">
+                <span *ngIf="!comment.initReply" (click)="onOpenReply(index)">Reply</span>
+                <span *ngIf="comment.initReply" (click)="onCloseReply(index)">Cancel</span>
+              </p>
+              <p class="comment-like">
+                Like
+              </p>
+              <p class="comment-dislike">
+                Dislike
+              </p>
+            </div>
+            <app-add-comment *ngIf="comment.initReply" tenancy="reply" [commentId]="comment.id"></app-add-comment>
+            <div *ngIf="comment.replies.length > 0" class="replied-comments">
+              <div *ngFor="let reply of comment.replies" style="padding-left: 30px;">
                 <div class="user-avatar">
-                  <img src="{{replied_comment.src}}">
+                  <ngx-avatar></ngx-avatar>
                 </div>
                 <div class="details-box">
                   <div style="display: flex; flex-direction: row;">
                     <p class="comment-name">
-                      {{replied_comment.name}}
+                      {{reply.author}}
                     </p>
                     <p class="comment-time">
-                      {{replied_comment.time}}
+                      {{reply.datetime | timeFromNow}}
                     </p>
                   </div>
-                  <div class="details-section">
-                    <p class="comment-description">
-                      {{replied_comment.comment}}
+                  <div class="action-buttons">
+                    <p class="comment-like">
+                      Like
                     </p>
-                    <p class="comment-reply">
-                      Reply
+                    <p class="comment-dislike">
+                      Dislike
                     </p>
                   </div>
                 </div>
@@ -56,14 +67,11 @@
         </div>
       </div>
     </div>
-    <form>
-      <div class="input-comment">
-        <textarea rows="9" class="input-comment-section"></textarea>
-      </div>
-      <div>
-        <button type="button" class="submit-btn">Add Reply</button>
-      </div>
-    </form>
+    <!--    No Comments-->
+    <div *ngIf="comments_count === 0" class="new-comment">
+      <p>No Comments to this post. Add a new comment</p>
+    </div>
+    <app-add-comment tenancy="comment"></app-add-comment>
   </div>
 </div>
 
