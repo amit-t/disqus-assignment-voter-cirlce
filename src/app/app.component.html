@@ -32,17 +32,17 @@
                 <span *ngIf="comment.initReply" (click)="onCloseReply(index)">Cancel</span>
               </p>
               <p class="comment-like">
-                <img src="../assets/images/like.svg" class="like-class" alt="">
+                <img (click)="onActivity('like', 'comment', index)" src="../assets/images/like.svg" class="like-class" alt="">
                 {{comment.likes}}
               </p>
               <p class="comment-dislike">
-                <img src="../assets/images/dislike.svg" class="dislike-class" alt="">
+                <img (click)="onActivity('dislike', 'comment', index)" src="../assets/images/dislike.svg" class="dislike-class" alt="">
                 {{comment.dislikes}}
               </p>
             </div>
             <app-add-comment *ngIf="comment.initReply" tenancy="reply" [commentId]="comment.id"></app-add-comment>
             <div *ngIf="comment.replies.length > 0" class="replied-comments">
-              <div *ngFor="let reply of comment.replies" style="padding-left: 30px;">
+              <div *ngFor="let reply of comment.replies; let replyIndex = index" style="padding-left: 30px;">
                 <div class="user-avatar">
                   <ngx-avatar></ngx-avatar>
                 </div>
@@ -61,11 +61,11 @@
                     </p>
                     <div class="action-buttons">
                       <p class="comment-like">
-                        <img src="../assets/images/like.svg" class="like-class" alt="">
+                        <img (click)="onActivity('like', 'reply', index, replyIndex)" src="../assets/images/like.svg" class="like-class" alt="">
                         {{reply.likes}}
                       </p>
                       <p class="comment-dislike">
-                        <img src="../assets/images/dislike.svg" class="dislike-class" alt="">
+                        <img (click)="onActivity('dislike', 'reply', index, replyIndex)" src="../assets/images/dislike.svg" class="dislike-class" alt="">
                         {{reply.dislikes}}
                       </p>
                     </div>

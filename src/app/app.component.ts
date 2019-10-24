@@ -39,7 +39,44 @@ export class AppComponent implements OnInit {
   onOpenReply(index) {
     this.comments[index].initReply = true;
   }
+
   onCloseReply(index) {
     this.comments[index].initReply = false;
+  }
+
+  /**
+   * Method to register a like/dislike for a comment or a reply
+   * TODO: When functionality for likes and dislikes increase this can be moved to it's own component
+   *
+   * @param type [like, dislike]
+   * @param tenancy [comment, reply]
+   * @param index
+   * @param sub_index
+   */
+  onActivity(type, tenancy, index, sub_index = null) {
+    switch (tenancy) {
+      case 'comment':
+        if (type === 'like') {
+          this.comments[index].likes += 1;
+        }
+        if (type === 'dislike') {
+          this.comments[index].dislikes += 1;
+        }
+        this.commentsService.addComment(this.comments);
+        break;
+      case 'reply':
+        this.logger.info(sub_index);
+        if (sub_index !== false && type === 'like') {
+          this.comments[index].replies[sub_index].likes += 1;
+        }
+        if (sub_index !== false && type === 'dislike') {
+          this.comments[index].replies[sub_index].dislikes += 1;
+        }
+        if (sub_index === false) {
+          this.logger.info('sub_index is needed when liking a reply');
+        }
+        this.commentsService.addComment(this.comments);
+        break;
+    }
   }
 }

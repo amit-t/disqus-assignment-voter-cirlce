@@ -24,7 +24,6 @@ export class AddCommentComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.getComments();
   }
 
   initForm() {
@@ -59,30 +58,30 @@ export class AddCommentComponent implements OnInit {
     this.logger.debug('New Comment', this.commentForm.value);
     switch (this.tenancy) {
       case 'comment':
-        this.addComment(this.comments, this.commentForm.value);
+        this.addComment(this.commentForm.value);
         break;
       case 'reply':
-        this.addReply(this.comments, this.commentId, this.commentForm.value);
+        this.addReply(this.commentId, this.commentForm.value);
         break;
     }
   }
 
-  getComments() {
+  addComment(newComment) {
     this.comments = this.commentsService.getComments();
     if (!this.comments) {
       this.comments = [];
     }
-    this.logger.debug('Current Comments', this.comments);
-  }
-
-  addComment(comments, newComment) {
-    comments.push(newComment);
-    this.commentsService.addComment(comments);
+    this.comments.push(newComment);
+    this.commentsService.addComment(this.comments);
     this.globalMsgService.sendMessage({type: 'COMMENTS', action: 'NEW_COMMENT'});
     this.initForm();
   }
 
-  addReply(comments, commentId, reply) {
+  addReply(commentId, reply) {
+    this.comments = this.commentsService.getComments();
+    if (!this.comments) {
+      this.comments = [];
+    }
     const current_comment = this.comments.find((element) => {
       return element.id === commentId;
     });
@@ -94,6 +93,5 @@ export class AddCommentComponent implements OnInit {
     this.logger.debug(`Found comment Index`, current_comment_index);
     this.globalMsgService.sendMessage({type: 'COMMENTS', action: 'NEW_COMMENT'});
     this.initForm();
-
   }
 }

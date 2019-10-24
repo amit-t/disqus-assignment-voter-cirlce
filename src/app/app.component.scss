@@ -111,11 +111,11 @@
   .dislike-class {
     width: 25px;
     height: auto;
-    margin-top: 3px;
+    margin-top: 1px;
     cursor: pointer;
   }
   .dislike-class:hover {
-    filter: invert(.8) sepia(150) saturate(6) hue-rotate(175deg);
+    filter: invert(0.40) sepia(15) saturate(5) hue-rotate(310deg);
   }
 }
 
