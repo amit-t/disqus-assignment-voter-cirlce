@@ -79,7 +79,8 @@
     </div>
     <!--    No Comments-->
     <div *ngIf="comments_count === 0" class="new-comment">
-      <p>No Comments to this post. Add a new comment</p>
+      <p>No comments exist for this post. </p>
+      <p>Add a new comment from below or <span class="action" (click)="onSeedComments()">seed comments</span></p>
     </div>
     <app-add-comment tenancy="comment"></app-add-comment>
   </div>

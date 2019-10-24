@@ -117,6 +117,11 @@
   .dislike-class:hover {
     filter: invert(0.40) sepia(15) saturate(5) hue-rotate(310deg);
   }
+
+  .action{
+    color: #1587c1;
+    cursor: pointer;
+  }
 }
 
 @media screen and (min-width: 200px) and (max-width: 767px) {

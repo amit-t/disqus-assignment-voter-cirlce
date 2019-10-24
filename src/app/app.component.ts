@@ -14,17 +14,21 @@ export class AppComponent implements OnInit {
   private comments: any;
   private comments_count = 0;
 
-  constructor(private commentsService: CommentsService, private logger: FileLoggerService, private globalMsgService: AppMessageGlobalService) {
+  constructor(
+    private commentsService: CommentsService,
+    private logger: FileLoggerService,
+    private globalMsgService: AppMessageGlobalService
+  ) {
     this.new_comment = commentsService.initComment();
-  }
-
-  async ngOnInit() {
-    await this.getComments();
     this.globalMsgService.getMessage().subscribe(async (message) => {
       if (message.type === 'COMMENTS' && message.action === 'NEW_COMMENT') {
         await this.getComments();
       }
     });
+  }
+
+  async ngOnInit() {
+    await this.getComments();
   }
 
   async getComments() {
@@ -33,7 +37,7 @@ export class AppComponent implements OnInit {
     if (this.comments) {
       this.comments_count = this.comments.length;
     }
-    this.logger.info(`Comments at Init - ${JSON.stringify(this.comments)}`);
+    this.logger.info(`Comments at Init - ${this.comments.length}`);
   }
 
   onOpenReply(index) {
@@ -50,8 +54,8 @@ export class AppComponent implements OnInit {
    *
    * @param type [like, dislike]
    * @param tenancy [comment, reply]
-   * @param index
-   * @param sub_index
+   * @param index [number]
+   * @param sub_index [number]
    */
   onActivity(type, tenancy, index, sub_index = null) {
     switch (tenancy) {
@@ -78,5 +82,13 @@ export class AppComponent implements OnInit {
         this.commentsService.addComment(this.comments);
         break;
     }
+  }
+
+  onSeedComments() {
+    this.commentsService.seedComments().subscribe((data) => {
+      this.comments = data;
+      this.comments_count = this.comments.length;
+      this.commentsService.addComment(this.comments);
+    });
   }
 }
