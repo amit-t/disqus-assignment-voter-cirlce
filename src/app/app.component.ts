@@ -40,10 +40,20 @@ export class AppComponent implements OnInit {
     this.logger.info(`Comments at Init - ${this.comments.length}`);
   }
 
+  /**
+   * Method to open the reply box for a comment
+   *
+   * @param index [number]
+   */
   onOpenReply(index) {
     this.comments[index].initReply = true;
   }
 
+  /**
+   * Method to close the reply box for a comment
+   *
+   * @param index [number]
+   */
   onCloseReply(index) {
     this.comments[index].initReply = false;
   }
@@ -84,6 +94,9 @@ export class AppComponent implements OnInit {
     }
   }
 
+  /**
+   * Method to seed localstorage with comments data from comments.json
+   */
   onSeedComments() {
     this.commentsService.seedComments().subscribe((data) => {
       this.comments = data;
