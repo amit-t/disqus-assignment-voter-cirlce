@@ -3,7 +3,10 @@
     <textarea formControlName="commentText" rows="9" class="input-comment-section"></textarea>
   </div>
   <div *ngIf="tenancy === 'comment'">
-    <button type="submit" class="submit-btn" [disabled]="!commentForm.valid">Add Comment</button>
+    <button class="btn submit-btn" [disabled]="!commentForm.valid">
+      <i class="fa fa-edit"></i> Add Comment
+    </button>
+
   </div>
   <div *ngIf="tenancy === 'reply'">
     <button type="submit" class="submit-btn" [disabled]="!commentForm.valid">Add Reply</button>

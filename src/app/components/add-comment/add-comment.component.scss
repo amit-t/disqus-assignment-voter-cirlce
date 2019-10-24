@@ -6,14 +6,25 @@
   width: 100%;
   border: 1px solid #e2e1e1;
   border-radius: 10px;
+  padding-left: 10px;
+  font-family: 'Open Sans';
 }
 
 .submit-btn {
-  padding: 10px 39px;
+  padding: 10px 39px 10px 10px;
   border-radius: 5px;
-  background: #49d056;
-  border: 1px solid #49d056;
+  background: #1587c1;
+  border: 1px solid #1587c1;
   color: white;
   font-size: 13px;
   font-family: "Open Sans";
+}
+.submit-btn i{
+  font-size: 16px;
+  padding-right: 15px;
+}
+textarea:focus {
+  border-radius: 5px;
+  outline: none;
+
 }
